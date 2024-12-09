@@ -3,39 +3,49 @@
 ---
 
 #### **Endpoint**  
+
 `GET /contract/{contract_address}`
 
----
-
 #### **Description**  
+
 This endpoint retrieves a SmartMuv analysis summary for a specified smart contract. If the analysis is already present in the database, it is fetched and returned. Otherwise, the input is validated, and a new analysis task is provided. 
 
 Status of the contract then can be checked by querying again.
 
 (Optional) The task status can also be tracked using the returned task ID using get task status.
 
+
+
 ---
+
+
 
 #### **Request**
 
 ##### **Method**  
+
 `GET`
 
 ##### **Path Parameters**
+
 | Parameter          | Type     | Required | Description                                                  |
 | ------------------ | -------- | -------- | ------------------------------------------------------------ |
 | `contract_address` | `string` | Yes      | The smart contract's address to analyze. Must be a valid Ethereum address. |
 
 ---
 
+
+
 #### **Response**
 
 ##### 1. **Successful Response**  
+
 If the contract analysis is already present in the database or the analysis is successfully completed, the response contains a summary of the contract analysis.
 
 - **Status Code**: `200 OK`  
 - **Format**: `application/json`  
 - **Sample**:
+
 ```json
 {
   "success": true,
@@ -51,6 +61,7 @@ If the contract analysis is already present in the database or the analysis is s
 ```
 
 ##### **Response Fields**
+
 | Field               | Type      | Description                                                  |
 | ------------------- | --------- | ------------------------------------------------------------ |
 | `total_mapping`     | `integer` | Total number of mappings in the contract.                    |
@@ -64,7 +75,9 @@ If the contract analysis is already present in the database or the analysis is s
 2. **Task Created for Analysis**
 
    - **Status Code**: `202 Accepted`
+
    - **Sample**:
+
      ```json
      {
        "success": true,
@@ -97,8 +110,11 @@ If the contract analysis is already present in the database or the analysis is s
 #### **Error Responses**
 
 1. **Invalid Contract Address**
+
    - **Status Code**: `400 Bad Request`
+
    - **Sample**:
+
      ```json
      {
        "success": false,
@@ -109,8 +125,11 @@ If the contract analysis is already present in the database or the analysis is s
 
 
 2. **Internal Server Error**
+
    - **Status Code**: `500 Internal Server Error`
+
    - **Sample**:
+
      ```json
      {
        "success": false,
@@ -129,10 +148,9 @@ If the contract analysis is already present in the database or the analysis is s
 
 
 
+---
 
 ### **Endpoint: Get Task Status**
-
----
 
 #### **Endpoint**
 
@@ -140,13 +158,13 @@ If the contract analysis is already present in the database or the analysis is s
 GET /task_status/{task-id}
 ```
 
----
-
 #### **Description**
 
 This endpoint retrieves the status of a task created for contract analysis. If the task is completed, it provides the analysis results.
 
 ---
+
+
 
 #### **Request**
 
@@ -164,6 +182,8 @@ GET
 
 ---
 
+
+
 #### **Response**
 
 ##### **Successful Response**
@@ -171,8 +191,11 @@ GET
 1. **Task in Progress**
 
    - **Status Code**: `200 OK`
+
    - **Format**: `application/json`
+
    - **Sample**:
+
      ```json
      {
        "success": true,
@@ -185,8 +208,11 @@ GET
 2. **Task Completed Successfully**
 
    - **Status Code**: `200 OK`
+
    - **Format**: `application/json`
+
    - **Sample**:
+
      ```json
      {
        "success": true,
@@ -202,14 +228,21 @@ GET
      ```
 
 
+
+---
+
+
+
 ##### **Error Responses**
 
 1. **Task Failed**
 
    - **Status Code**: `404 OK`
+
    - **Format**: `application/json`
+
    - **Sample**:
-     
+
      ```json
      {
        "success": false,
@@ -221,7 +254,9 @@ GET
 2. **Internal Server Error**
 
    - **Status Code**: `500 Internal Server Error`
+
    - **Sample**:
+
      ```json
      {
        "success": false,
@@ -229,8 +264,7 @@ GET
        "message": "An unexpected error occurred. Please try again later."
      }
      ```
-     
-     
+
      
 
 
